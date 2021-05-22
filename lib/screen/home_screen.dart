@@ -17,7 +17,10 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SvgPicture.asset('assets/icons/menu.svg'),
-                Image.asset('assets/images/user.png'),
+                SvgPicture.asset(
+                  'assets/icons/profile.svg',
+                  height: 35,
+                ),
               ],
             ),
             SizedBox(height: 30),
@@ -97,8 +100,6 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                // staggeredTileBuilder: (index) =>
-                //     StaggeredTile.count(2, index.isEven ? 2 : 1),
                 staggeredTileBuilder: (index) => StaggeredTile.fit(1),
               ),
             ),
