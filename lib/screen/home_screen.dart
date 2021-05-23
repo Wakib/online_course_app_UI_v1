@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:online_course_app_ui_v1/constants.dart';
 import 'package:online_course_app_ui_v1/model/category.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'details_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -73,31 +74,41 @@ class HomeScreen extends StatelessWidget {
                 itemCount: categories.length,
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 20,
-                itemBuilder: (context, index) => Container(
-                  padding: EdgeInsets.all(15),
-                  height: index.isEven ? 200 : 230,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: kBlueColor,
-                    image: DecorationImage(
-                      image: AssetImage(categories[index].image),
-                      fit: BoxFit.cover,
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailsScreen(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    height: index.isEven ? 200 : 230,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: kBlueColor,
+                      image: DecorationImage(
+                        image: AssetImage(categories[index].image),
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        categories[index].name,
-                        style: kTitleTextStyle.copyWith(fontSize: 18),
-                      ),
-                      Text(
-                        '${categories[index].numOfCourses} Courses',
-                        style: TextStyle(
-                          color: kTextColor.withOpacity(.6),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          categories[index].name,
+                          style: kTitleTextStyle.copyWith(fontSize: 18),
                         ),
-                      ),
-                    ],
+                        Text(
+                          '${categories[index].numOfCourses} Courses',
+                          style: TextStyle(
+                            color: kTextColor.withOpacity(.6),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 staggeredTileBuilder: (index) => StaggeredTile.fit(1),

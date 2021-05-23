@@ -27,7 +27,12 @@ class DetailsScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SvgPicture.asset('assets/icons/arrow-left.svg'),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: SvgPicture.asset('assets/icons/arrow-left.svg'),
+                      ),
                       SvgPicture.asset('assets/icons/more-vertical.svg'),
                     ],
                   ),
@@ -102,41 +107,102 @@ class DetailsScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(50),
                   color: Colors.white,
                 ),
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(left: 20, top: 30, right: 20, bottom: 30),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Course Content',
-                        style: kTitleTextStyle,
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: 20, top: 30, right: 20, bottom: 30),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Course Content',
+                            style: kTitleTextStyle,
+                          ),
+                          SizedBox(height: 30),
+                          CourseContent(
+                            serialNumber: '01',
+                            duration: '5:35 mins',
+                            title: 'Welcome to the course',
+                            isDone: true,
+                          ),
+                          CourseContent(
+                            serialNumber: '02',
+                            duration: '19:04 mins',
+                            title: 'Design Thinking - Intro',
+                            isDone: true,
+                          ),
+                          CourseContent(
+                            serialNumber: '03',
+                            duration: '12:48 mins',
+                            title: 'Design Thinking Process',
+                          ),
+                          CourseContent(
+                            serialNumber: '04',
+                            duration: '37:54 mins',
+                            title: 'Customer Perspective',
+                          ),
+                        ],
                       ),
-                      SizedBox(height: 30),
-                      CourseContent(
-                        serialNumber: '01',
-                        duration: '5:35 mins',
-                        title: 'Welcome to the course',
-                        isDone: true,
+                    ),
+                    Positioned(
+                      right: 0,
+                      left: 0,
+                      bottom: 0,
+                      child: Container(
+                        height: 100,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              offset: Offset(0, 5),
+                              blurRadius: 50,
+                              color: kTextColor.withOpacity(.15),
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 15, horizontal: 25),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: Colors.redAccent.withOpacity(.3),
+                                ),
+                                child: SvgPicture.asset(
+                                    'assets/icons/shopping-bag.svg'),
+                              ),
+                              SizedBox(width: 10),
+                              Expanded(
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(vertical: 20),
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 15, horizontal: 25),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: kBlueColor,
+                                  ),
+                                  child: Text(
+                                    'Buy Now',
+                                    style: kSubtitleTextStyle.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      CourseContent(
-                        serialNumber: '02',
-                        duration: '19:04 mins',
-                        title: 'Design Thinking - Intro',
-                        isDone: true,
-                      ),
-                      CourseContent(
-                        serialNumber: '03',
-                        duration: '12:48 mins',
-                        title: 'Design Thinking Process',
-                      ),
-                      CourseContent(
-                        serialNumber: '04',
-                        duration: '37:54 mins',
-                        title: 'Customer Perspective',
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
